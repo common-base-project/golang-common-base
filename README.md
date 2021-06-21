@@ -3,6 +3,7 @@
     Golang + Gin + Gorm + MySQL 基础手脚架
 
 ## make 打包
+    注意：Makefile 文件里 main.go 的路径
     make docker-all VERSION="staging_v0.0.1" ENV_SERVER_MODE="staging"
     make docker-all VERSION="staging_v0.0.1" ENV_SERVER_MODE="dev"
     make docker-all VERSION="prod_v0.0.1" ENV_SERVER_MODE="prod"
@@ -17,9 +18,9 @@ Run the Swag in your Go project root folder which contains main.go file, Swag wi
 # 基于Makefile
 make swagger
 
-# OR 使用swag命令
-swag init --generalInfo ./cmd/gin-admin/main.go --output ./internal/app/swagger
-swag init -g ./src/cmd/main.go
+# OR 使用 swag 命令（注意：main.go 的路径）
+    swag init --generalInfo ./cmd/gin-admin/main.go --output ./internal/app/swagger
+    swag init -g ./src/cmd/main.go
 
 ```
 

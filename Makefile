@@ -8,7 +8,6 @@ GOARCH=amd64
 NAME=golang-common-base
 # main.go 路径
 MAIN_PATH=./app/cmd/
-# MAIN_PATH=./app/cmd/main.go
 PORT=9088
 COMMIT=$(shell git log -1 --pretty=format:%h)
 DEV_NAME=$(NAME)-$(COMMIT)
@@ -19,7 +18,7 @@ RELEASE_VERSION=$(VERSION)
 endif
 
 # docker相关
-# DOCKER_REGISTRY=registry.xxx.cn/qa
+# DOCKER_REGISTRY=registry.xxx.cn/
 DOCKER_REGISTRY=mustang2247
 DOCKER_TARGET=$(DOCKER_REGISTRY)/$(NAME):$(RELEASE_VERSION)
 
