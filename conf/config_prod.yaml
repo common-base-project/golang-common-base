@@ -1,0 +1,38 @@
+server:
+  host: 0.0.0.0
+  port: :9088
+db:
+  name: db_common
+  addr: mysqldb
+  username: root
+  password: 123456
+  gorm:
+    logMode: 0
+    maxOpenConn: 2000
+    maxIdleConn: 20
+    singularTable: 1
+log:
+  level: info
+  maxsize: 10
+  maxage: 30
+  maxbackups: 200
+  localtime: 1
+  compress: 1
+  fileName: golang-common-base.log
+api:
+  version: /api/v1
+jwt:
+  secret: vz5(#pfnf+#p5ok&d2yrqd#)k0jz!#tb*$=^c5nl0(z+0=p5!9
+email:
+  eim:
+    server: partner.outlook.cn
+    sender: eim@xxx.com
+    password: 123456
+    port: 587
+    security: true
+  support:
+    server: partner.outlook.cn
+    sender: support@xxx.com
+    password: 123456
+    port: 587
+    security: true

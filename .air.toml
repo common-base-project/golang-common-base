@@ -1,0 +1,45 @@
+# Working directory
+# . or absolute path, please note that the directories following must be under root.
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  # Binary file yields from `cmd`.
+  bin = "./tmp/main"
+  # Just plain old shell command. You could use `make` as well.
+  cmd = "go build -o ./tmp/main ./app/cmd/main.go"
+  # It's not necessary to trigger build each time file changes if it's too frequent.
+  delay = 1000
+  exclude_dir = ["assets", "tmp", "vendor", "_docker", "_release"]
+  exclude_file = []
+  exclude_regex = []
+  exclude_unchanged = false
+  follow_symlink = false
+  # Customize binary.
+  # full_bin = "APP_ENV=dev APP_USER=air ./tmp/main"
+  full_bin = ""
+  include_dir = ["./conf"]
+  # Watch these filename extensions.
+  include_ext = ["go", "tpl", "tmpl", "html"]
+  # Delay after sending Interrupt signal
+  kill_delay = 500
+  # This log file places in your tmp_dir.
+  log = ".log/air.log"
+  send_interrupt = false
+  stop_on_error = true
+
+# Customize each part's color. If no color found, use the raw app log.
+[color]
+  app = ""
+  build = "yellow"
+  main = "magenta"
+  runner = "green"
+  watcher = "cyan"
+
+[log]
+  # Show log time
+  time = false
+
+# Delete tmp directory on exit
+[misc]
+  clean_on_exit = true

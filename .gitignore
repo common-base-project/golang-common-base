@@ -1,0 +1,17 @@
+.idea
+.DS_Store
+vendor
+.git
+tmp
+log
+_docker
+_release
+./workflow
+./case
+
+.target
+/public/
+/log/
+.vscode
+
+golang-common-base

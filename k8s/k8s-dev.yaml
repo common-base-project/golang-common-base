@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: golang-common-base
+  namespace: unicorn-stage
+  labels:
+    app: golang-common-base
+    service: golang-common-base
+spec:
+  ports:
+    - port: 9088
+      name: http
+  selector:
+    app: golang-common-base
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: golang-common-base
+  namespace: unicorn-stage
+  labels:
+    account: golang-common-base
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-common-base-v1
+  namespace: unicorn-stage
+  labels:
+    app: golang-common-base
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golang-common-base
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: golang-common-base
+        version: v1
+    spec:
+      serviceAccountName: golang-common-base
+      containers:
+        - name: golang-common-base
+          image: golang-common-base:staging_v0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9088

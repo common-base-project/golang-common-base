@@ -1,0 +1,72 @@
+#image: registry.xxx.cn/devops/runner-docker-dind:1.0.1
+#
+#variables:
+#  DOCKER_DRIVER: overlay2
+#  DOCKER_TLS_CERTDIR: ""
+#  GOPROXY: "http://nexus.xxx.cn:8090/repository/goproxy/"
+#
+#before_script:
+#  - export CI_COMMIT_SHORT_ID=$(git rev-parse --short HEAD)
+#  - echo "before ok"
+#
+#stages:
+#  - test
+#  - build
+#  - deploy-prod
+#  - deploy-test
+#
+## 测试
+#test-master:
+#  stage: test
+#  tags:
+#    - chaos
+#  only:
+#    - master
+#  script:
+#    - echo "test ok"
+#    # - go test
+#
+## 编译
+#build-master:
+#  stage: build
+#  tags:
+#    - chaos
+#  only:
+#    - tags
+#  services:
+#    - registry.xxx.cn/devops/runner-docker-dind:1.0.1
+#  script:
+#    # docker login
+#    - export DOCKER_HOST='tcp://localhost:2375'
+#    - docker login registry.xxx.cn -u chaos -p xxx.2019
+#    - make docker-all VERSION=$CI_COMMIT_REF_NAME
+#
+## 部署正式环境
+#deploy-prod:
+#  stage: deploy-prod
+#  tags:
+#    - chaos
+#  only:
+#    - tags
+#  except:
+#    - branches
+#  services:
+#    - registry.xxx.cn/devops/runner-docker-dind:1.0.1
+#  script:
+#    - kubectl --kubeconfig=k8s/kubeconfig_prod patch statefulset eim-process --patch "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"eim-process\",\"image\":\"registry.xxx.cn/eim/eim-process:$CI_COMMIT_REF_NAME\"}]}}}}" -n eim
+#
+#
+## 部署测试环境
+#deploy-test:
+#  stage: deploy-test
+#  tags:
+#    - devops-test
+#  only:
+#    - dev
+#  services:
+#    - registry.xxx.cn/chaos/runner-docker-dind:1.0.1
+#  script:
+#    - export DOCKER_HOST='tcp://localhost:2375'
+#    - docker login registry.xxx.cn -u chaos -p xxx.2019
+#    - make docker-all VERSION="dev_$CI_COMMIT_SHORT_ID"
+#    - kubectl --kubeconfig=k8s/kubeconfig_test patch statefulset eim-process --patch "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"eim-process\",\"image\":\"registry.xxx.cn/eim/eim-process:dev_$CI_COMMIT_SHORT_ID\"}]}}}}" -n eim

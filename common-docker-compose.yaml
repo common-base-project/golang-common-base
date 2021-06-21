@@ -1,0 +1,55 @@
+version: '3.3'
+services:
+  common-db:
+    # image: 'mysql:latest'
+    image: 'mariadb:latest'
+    # platform: linux/amd64
+    restart: always
+    container_name: common-db
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - './datas/mysql:/var/lib/mysql'
+      # - './config/my.cnf:/etc/mysql/conf.d/my.cnf'
+      # - './local_data/mysql_data:/usr/local/share/data'
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8088:8080
+
+  common-redis:
+    image: 'redis:6.0.10'
+    # platform: linux/amd64
+    container_name: common-redis
+    restart: always
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+
+  common-rabbitmq:
+    image: 'rabbitmq:3.8.16-management'
+    container_name: common-rabbitmq
+    restart: always
+    ports:
+      - '4369:4369'
+      - '5671:5671'
+      - '5672:5672'
+      - '15672:15672'
+      - '25672:25672'
+    expose:
+      - 5672
+      - 15672
+
+networks:
+  common-tools:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.25.1/16
