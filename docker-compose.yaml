@@ -56,15 +56,15 @@ services:
     volumes:
       - '.:/opt/app'
     ports:
-      - 9080:9080
+      - 9088:9088
     links:
-      - common-mysql-db
+      - common-db
 #      - common-redis
     depends_on:
-      - common-mysql-db
+      - common-db
 #      - common-redis
     environment:
-      MYSQL_HOST: common-mysql-db
+      MYSQL_HOST: common-db
       MYSQL_PORT: 3306
       MYSQL_USER: common-user
       MYSQL_PASSWORD: common_123456

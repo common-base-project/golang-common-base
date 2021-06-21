@@ -1,7 +1,7 @@
 FROM golang:1.15
 MAINTAINER Mustang <mustang2247@gmail.com>
 
-ENV PORT_TO_EXPOSE=9080
+ENV PORT_TO_EXPOSE=9088
 ENV PROC_NAME=golang-common-base
 ENV ENV_SERVER_MODE=dev
 
@@ -18,10 +18,10 @@ RUN go mod download
 # go构建可执行文件
 #RUN go build .
 
-#COPY Shanghai /etc/localtime
-#RUN echo "Asia/Shanghai" >  /etc/timezone
+COPY docker/Shanghai /etc/localtime
+RUN echo "Asia/Shanghai" >  /etc/timezone
 
 #暴露端口
-EXPOSE 9080
+EXPOSE 9088
 ENTRYPOINT ["air", "-d"]
 #ENTRYPOINT ["./golang-common-base"]
