@@ -33,7 +33,7 @@ func init() {
 // @version 0.0.1
 // @contact.name Mustang Kong
 // @contact.email mustang2247@gmail.com
-// http://localhost:8088/api/v1/swagger/index.html
+// http://localhost:9088/api/v1/swagger/index.html
 func main() {
 	// 同步用户和部门数据
 	//go auth_rsync.Main()
