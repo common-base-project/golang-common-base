@@ -52,5 +52,6 @@ Run the Swag in your Go project root folder which contains main.go file, Swag wi
 ## 解决 Mac pro m1 standard_init_linux.go:228: exec user process caused: exec format error
 ```shell
 # 解决 Mac pro m1 （arm芯片）电脑 docker build 默认build是 linux/arm 我们需要 linux/amd64
+# 参考文档： https://docs.docker.com/desktop/multi-arch/
 docker buildx build --platform linux/amd64
 ```
