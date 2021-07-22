@@ -5,7 +5,7 @@
 ## make 打包
     注意：Makefile 文件里 main.go 的路径
 
-    make docker-all VERSION="staging_v0.0.1" ENV_SERVER_MODE="staging"
+    make docker-all VERSION="staging_v0.0.2" ENV_SERVER_MODE="staging"
     make docker-all VERSION="staging_v0.0.1" ENV_SERVER_MODE="dev"
     make docker-all VERSION="prod_v0.0.1" ENV_SERVER_MODE="prod"
 
@@ -47,4 +47,10 @@ Run the Swag in your Go project root folder which contains main.go file, Swag wi
         d 可以这 Container 里直接使用自己的git， 也可以直接调试等
         
      
+```
+
+## 解决 Mac pro m1 standard_init_linux.go:228: exec user process caused: exec format error
+```shell
+# 解决 Mac pro m1 （arm芯片）电脑 docker build 默认build是 linux/arm 我们需要 linux/amd64
+docker buildx build --platform linux/amd64
 ```
