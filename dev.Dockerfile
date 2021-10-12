@@ -13,8 +13,8 @@ COPY . .
 #RUN go env -w GO111MODULE=on && go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 RUN go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 
-RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
-RUN go mod download
+#RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+RUN go mod tidy
 # go构建可执行文件
 #RUN go build .
 
