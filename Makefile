@@ -73,4 +73,4 @@ docker-clean:
 docker-push:
 	docker push $(DOCKER_TARGET)
 
-docker-all: docker-build docker-push
+docker-all: docker-build docker-push clean
