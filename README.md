@@ -1,5 +1,4 @@
 # Golang + Gin + Gorm + MySQL 基础手脚架
-
     Golang + Gin + Gorm + MySQL 基础手脚架，支持容器和k8s部署。打包后自动生成 docker image 可以直接配置好账户，直接自动化上传。
 
 ## make 打包
@@ -11,17 +10,15 @@
 
 ## 生成`swagger`文档
 ```
-Download Swag for Go by using:
     go get -u github.com/swaggo/swag/cmd/swag
-Run the Swag in your Go project root folder which contains main.go file, Swag will parse comments and generate required files(docs folder and docs/doc.go).
+    
     swag init
     
 # 基于Makefile
     make swagger
 
 # OR 使用 swag 命令（注意：main.go 的路径）
-    swag init --generalInfo ./cmd/gin-admin/main.go --output ./internal/app/swagger
-    swag init -g ./src/cmd/main.go
+    swag init -g ./app/cmd/main.go  -o ./docs/
 
 ```
 

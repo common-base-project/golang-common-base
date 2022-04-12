@@ -23,7 +23,7 @@ import (
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
-// 加载路由
+// Load 加载路由
 func Load(g *gin.Engine) {
 	// 404
 	g.NoRoute(func(c *gin.Context) {

@@ -55,6 +55,7 @@ clean:
 	@rm -rf _dev
 	@rm -rf _release
 	@rm -rf _docker
+	@rm -rf log
 	@echo "clean okay"
 
 docker-build: clean pack-release
@@ -62,8 +63,6 @@ docker-build: clean pack-release
 	@cp -f Dockerfile _docker
 	@cp _release/$(RELEASE_NAME).tar.gz _docker/
 	@cp docker/Shanghai _docker/
-	#docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t username/demo:latest --push .
-	#cd _docker && docker build --no-cache -t $(DOCKER_TARGET) --build-arg modeenv=$(ENV_SERVER_MODE) --build-arg exposeport=$(PORT) --build-arg procname=$(NAME) --build-arg packagefile=$(RELEASE_NAME).tar.gz .
 	cd _docker && docker buildx build --platform linux/amd64 --no-cache -t $(DOCKER_TARGET) --build-arg modeenv=$(ENV_SERVER_MODE) --build-arg exposeport=$(PORT) --build-arg procname=$(NAME) --build-arg packagefile=$(RELEASE_NAME).tar.gz .
 	@echo "docker-build okay"
 

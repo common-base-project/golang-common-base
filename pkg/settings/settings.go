@@ -9,7 +9,7 @@ import (
   @Author : Mustang Kong
 */
 
-// 获取当前项目路径
+// ObjectPath 获取当前项目路径
 func ObjectPath() (projectPath string) {
 	projectPath, err := os.Getwd()
 	if err != nil {

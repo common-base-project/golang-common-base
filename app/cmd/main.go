@@ -12,6 +12,7 @@ import (
 	_ "golang-common-base/pkg/config"
 	"golang-common-base/pkg/connection"
 	"golang-common-base/pkg/logger"
+	"golang-common-base/pkg/service/auth_rsync"
 	"os"
 
 	"github.com/spf13/viper"
@@ -36,7 +37,7 @@ func init() {
 // http://localhost:9088/api/v1/swagger/index.html
 func main() {
 	// 同步用户和部门数据
-	//go auth_rsync.Main()
+	go auth_rsync.Main()
 
 	// 同步数据结构
 	models.AutoMigrateTable()
