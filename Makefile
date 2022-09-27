@@ -18,8 +18,7 @@ RELEASE_VERSION=$(VERSION)
 endif
 
 # docker相关
-# DOCKER_REGISTRY=registry.xxx.cn/
-DOCKER_REGISTRY=mustang2247
+DOCKER_REGISTRY=harbor.5qipa.com:6443/games
 DOCKER_TARGET=$(DOCKER_REGISTRY)/$(NAME):$(RELEASE_VERSION)
 
 
@@ -56,6 +55,7 @@ clean:
 	@rm -rf _dev
 	@rm -rf _release
 	@rm -rf _docker
+	@rm -rf log
 	@echo "clean okay"
 
 docker-build: clean pack-release
@@ -63,7 +63,7 @@ docker-build: clean pack-release
 	@cp -f Dockerfile _docker
 	@cp _release/$(RELEASE_NAME).tar.gz _docker/
 	@cp docker/Shanghai _docker/
-	cd _docker && docker build --no-cache -t $(DOCKER_TARGET) --build-arg modeenv=$(ENV_SERVER_MODE) --build-arg exposeport=$(PORT) --build-arg procname=$(NAME) --build-arg packagefile=$(RELEASE_NAME).tar.gz .
+	cd _docker && docker buildx build --platform linux/amd64 --no-cache -t $(DOCKER_TARGET) --build-arg modeenv=$(ENV_SERVER_MODE) --build-arg exposeport=$(PORT) --build-arg procname=$(NAME) --build-arg packagefile=$(RELEASE_NAME).tar.gz .
 	@echo "docker-build okay"
 
 docker-clean:
@@ -72,4 +72,4 @@ docker-clean:
 docker-push:
 	docker push $(DOCKER_TARGET)
 
-docker-all: docker-build docker-push
+docker-all: docker-build docker-push clean

@@ -1,4 +1,35 @@
 definitions:
+  auth.User:
+    properties:
+      depart_id:
+        type: integer
+      email:
+        type: string
+      hrbp:
+        type: string
+      id:
+        type: integer
+      nickname:
+        type: string
+      onboardingtime:
+        type: string
+      position:
+        type: string
+      report_to:
+        type: string
+      status:
+        type: string
+      sub_leader:
+        type: string
+      twf_created:
+        $ref: '#/definitions/jsonTime.JSONTime'
+      twf_modified:
+        $ref: '#/definitions/jsonTime.JSONTime'
+      username:
+        type: string
+      vp:
+        type: string
+    type: object
   email.EmailTextContent:
     properties:
       content:
@@ -95,7 +126,6 @@ paths:
           description: '{"code":0,"message":"获取分类列表成功","data":{}}'
           schema:
             type: string
-      summary: 获取 email 列表
       tags:
       - email
   /api/v1/email/push:
@@ -140,4 +170,109 @@ paths:
       summary: 更新 email 数据
       tags:
       - email
+  /api/v1/user:
+    get:
+      consumes:
+      - application/json
+      description: 获取 user 列表
+      parameters:
+      - description: 获取第几页的数据，默认为：1
+        in: query
+        name: page
+        type: integer
+      - description: 每页展示多少行，默认为：10
+        in: query
+        name: page_size
+        type: integer
+      - description: 按照倒序或者顺序的方式排列，0或者-1为倒序，其他值为顺序
+        in: query
+        name: sort
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "0":
+          description: '{"code":0,"message":"获取分类列表成功","data":{}}'
+          schema:
+            type: string
+      summary: 获取 user 列表
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: 创建用户
+      parameters:
+      - description: 用户数据
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/auth.User'
+      produces:
+      - application/json
+      responses:
+        "0":
+          description: ""
+      summary: 创建用户
+      tags:
+      - user
+  /api/v1/user/:id:
+    get:
+      consumes:
+      - application/json
+      description: 获取 user 详情
+      parameters:
+      - description: user id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "0":
+          description: '{"code":0,"message":"获取 user 详情","data":{}}'
+          schema:
+            type: string
+      summary: 获取 user 详情
+      tags:
+      - user
+  /api/v1/user/delete/:id:
+    delete:
+      consumes:
+      - application/json
+      description: 删除 user 数据
+      produces:
+      - application/json
+      responses:
+        "0":
+          description: '{"code":0,"message":"删除 user 成功","data":"32"}'
+          schema:
+            type: string
+      summary: 删除 user 数据
+      tags:
+      - user
+  /api/v1/user/update/:id:
+    put:
+      consumes:
+      - application/json
+      description: 更新 user 数据
+      parameters:
+      - description: 更新user数据
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/auth.User'
+      produces:
+      - application/json
+      responses:
+        "0":
+          description: '{"code":0,"message":"更新 user 数据成功","data":"32"}'
+          schema:
+            type: string
+      summary: 更新 user 数据
+      tags:
+      - user
 swagger: "2.0"

@@ -19,7 +19,7 @@ import (
 邮件处理
 */
 
-// @Summary 获取 email 列表
+// GetEmailListHandler @Summary 获取 email 列表
 // @Description 获取 email 列表
 // @Tags email
 // @Accept json
@@ -49,7 +49,7 @@ func GetEmailListHandler(c *gin.Context) {
 	Response(c, nil, result, "")
 }
 
-// 添加 email 数据到数据库
+// AddEmailHandler 添加 email 数据到数据库
 // @Summary 添加 email 数据到数据库
 // @Description 添加 email 数据到数据库
 // @Tags email
@@ -76,7 +76,7 @@ func AddEmailHandler(c *gin.Context) {
 	Response(c, nil, nil, "")
 }
 
-// 更新 email 数据
+// UpdateEmailHandler 更新 email 数据
 // @Summary 更新 email 数据
 // @Description 更新分类	{"name":"test1234","key":"mus_test","child":{"0-":"test"}}"
 // @Tags email
@@ -107,7 +107,7 @@ func UpdateEmailHandler(c *gin.Context) {
 	Response(c, nil, nil, "")
 }
 
-// 删除 email 数据
+// DeleteEmailHandler 删除 email 数据
 // @Summary 删除 email 数据
 // @Description 删除 email 数据
 // @Tags email
@@ -125,7 +125,7 @@ func DeleteEmailHandler(c *gin.Context) {
 	Response(c, nil, nil, "")
 }
 
-// 推送 email 数据到数据库
+// AddPushHandler 推送 email 数据到数据库
 // @Summary 推送 email 数据到数据库
 // @Description 推送 email 数据到数据库
 // @Tags email

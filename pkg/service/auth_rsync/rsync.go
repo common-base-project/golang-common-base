@@ -1,12 +1,12 @@
 package auth_rsync
 
-// import (
-// 	"time"
-// )
+import (
+	"time"
+)
 
-// func Main() {
-// 	for range time.Tick(300 * time.Second) {
-// 		_ = GetAllDeparts()
-// 		GetAllUsers()
-// 	}
-// }
+func Main() {
+	for range time.Tick(300 * time.Second) {
+		//_ = GetAllDeparts()
+		//GetAllUsers()
+	}
+}

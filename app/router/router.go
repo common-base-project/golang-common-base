@@ -4,6 +4,9 @@ package router
   @Author : Mustang Kong
 */
 
+import "github.com/swaggo/gin-swagger" // gin-swagger middleware
+import "github.com/swaggo/files"       // swagger embed files
+
 import (
 	"fmt"
 	"golang-common-base/app/middleware"
@@ -19,11 +22,9 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
-// 加载路由
+// Load 加载路由
 func Load(g *gin.Engine) {
 	// 404
 	g.NoRoute(func(c *gin.Context) {

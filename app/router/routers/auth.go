@@ -17,7 +17,7 @@ func UserRouter(g *gin.Engine) {
 	authUser := g.Group(authRouterUser)
 	{
 		authUser.POST("", auth.CreateUserHandler)
-		authUser.PUT("/:id", auth.UpdateUserHandler)
+		authUser.PUT("/update/:id", auth.UpdateUserHandler)
 		authUser.DELETE("/:id", auth.DeleteUserHandler)
 		authUser.GET("", auth.UserListHandler)
 		authUser.GET("/:id", auth.UserDetailHandler)
