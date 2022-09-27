@@ -11,9 +11,7 @@
 ## 生成`swagger`文档
 ```
     go get -u github.com/swaggo/swag/cmd/swag
-    
     swag init
-    
 # 基于Makefile
     make swagger
 
