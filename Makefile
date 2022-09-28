@@ -18,7 +18,7 @@ RELEASE_VERSION=$(VERSION)
 endif
 
 # docker相关
-DOCKER_REGISTRY=harbor.5qipa.com:6443/games
+DOCKER_REGISTRY=harbor.5qipa.com:6443/common
 DOCKER_TARGET=$(DOCKER_REGISTRY)/$(NAME):$(RELEASE_VERSION)
 
 
