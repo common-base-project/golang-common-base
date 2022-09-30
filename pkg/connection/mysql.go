@@ -2,6 +2,7 @@ package connection
 
 import (
 	"fmt"
+	"golang-common-base/pkg/config"
 	_ "golang-common-base/pkg/config"
 	"golang-common-base/pkg/logger"
 	"time"
@@ -44,7 +45,7 @@ func openDB(username, password, addr, name string) *gorm.DB {
 		//Logger: logger.GetLogger(),
 	})
 	if err != nil {
-		panic(fmt.Sprintf("数据库连接失败，连接地址: %s，error: %s", viper.GetString(`db.addr`), err))
+		panic(fmt.Sprintf("数据库连接失败，连接地址: %s，error: %s", addr, err))
 	}
 
 	// 设置字符集
@@ -78,10 +79,15 @@ func setupDB(db *gorm.DB) {
 }
 
 func InitSelfDB() *gorm.DB {
-	return openDB(viper.GetString("db.username"),
-		viper.GetString("db.password"),
-		viper.GetString("db.addr"),
-		viper.GetString("db.name"))
+	//return openDB(viper.GetString("db.username"),
+	//	viper.GetString("db.password"),
+	//	viper.GetString("db.addr"),
+	//	viper.GetString("db.name"))
+
+	return openDB(config.DBConfig.UserName,
+		config.DBConfig.Password,
+		config.DBConfig.URL,
+		config.DBConfig.DBName)
 }
 
 func (db *Database) Init() {

@@ -3,9 +3,9 @@ server:
   port: :9080
 db:
   name: db_common_base
-  addr: mysqldb
-  username: root
-  password: 123456
+  addr: common-db
+  username: common-user
+  password: common_123456
   gorm:
     logMode: 0
     maxOpenConn: 200

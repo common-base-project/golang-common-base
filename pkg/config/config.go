@@ -17,6 +17,16 @@ import (
 // config path
 var configDir string
 var EnvMode string
+var DBConfig DataBaseConfig
+
+type DataBaseConfig struct {
+	DBName   string
+	Host     string
+	PORT     string
+	UserName string
+	Password string
+	URL      string
+}
 
 type Config struct {
 	Name string
@@ -33,6 +43,7 @@ func Initial() {
 	} else if EnvMode == "staging" {
 		configDir = "./conf/config_stage.yaml"
 	} else {
+		EnvMode = "dev"
 		os.Setenv("ENV_SERVER_MODE", "dev")
 		configDir = "./conf/config_dev.yaml"
 	}
@@ -45,6 +56,23 @@ func Initial() {
 	err := Init(*cfg)
 	if err != nil {
 		panic(err)
+	}
+
+	DBConfig = DataBaseConfig{
+		DBName:   os.Getenv("MYSQL_DATABASE"),
+		Host:     os.Getenv("MYSQL_HOST"),
+		PORT:     os.Getenv("MYSQL_PORT"),
+		UserName: os.Getenv("MYSQL_USER"),
+		Password: os.Getenv("MYSQL_PASSWORD"),
+	}
+	if EnvMode == "dev" && (DBConfig.Host == "" || DBConfig.PORT == "") {
+		DBConfig.DBName = viper.GetString("db.name")
+		DBConfig.UserName = viper.GetString("db.username")
+		DBConfig.Password = viper.GetString("db.password")
+
+		DBConfig.URL = viper.GetString("db.addr")
+	} else {
+		DBConfig.URL = DBConfig.Host + ":" + DBConfig.PORT
 	}
 
 	// 配置文件热加载

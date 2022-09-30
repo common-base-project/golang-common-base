@@ -8,25 +8,58 @@ services:
       - 3306:3306
     expose:
       - 3306
-#    volumes:
-#      - './data/mysql:/var/lib/mysql'
+    volumes:
+      - './data/mysql:/var/lib/mysql'
+#      - './config/my.cnf:/etc/mysql/conf.d/my.cnf'
+#      - './local_data/mysql_data:/usr/local/share/data'
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_USER: common-user
       MYSQL_PASSWORD: common_123456
       MYSQL_DATABASE: db_common_base
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8088:8080
+
+  common-redis:
+    image: 'redis:latest'
+    container_name: common-redis
+    restart: always
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+
+#  common-rabbitmq:
+#    image: 'rabbitmq:3.8.16-management'
+#    container_name: common-rabbitmq
+#    restart: always
+#    ports:
+#      - '4369:4369'
+#      - '5671:5671'
+#      - '5672:5672'
+#      - '15672:15672'
+#      - '25672:25672'
+#    expose:
+#      - 5672
+#      - 15672
 
   golang-common-base:
     image: 'harbor.5qipa.com:6443/common/golang-common-base:staging_v0.0.2'
     container_name: golang-common-base
     tty: true
-    restart: always
+#    volumes:
+#      - '.:/opt/app'
     ports:
       - 9080:9080
     links:
       - common-db
+#      - common-redis
     depends_on:
       - common-db
+#      - common-redis
     environment:
       MYSQL_HOST: common-db
       MYSQL_PORT: 3306
