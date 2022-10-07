@@ -8,6 +8,9 @@
     make docker-all VERSION="staging_v0.0.1" ENV_SERVER_MODE="dev"
     make docker-all VERSION="prod_v0.0.1" ENV_SERVER_MODE="prod"
 
+    golang build:
+    go build -o golang-common-base ./app/cmd/
+
 ## 生成`swagger`文档
 ```
     go get -u github.com/swaggo/swag/cmd/swag
