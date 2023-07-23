@@ -38,10 +38,13 @@ func openDB(username, password, addr, name string) *gorm.DB {
 	logger.Info("database url: ", config)
 	//db, err := gorm.Open("mysql", config)
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN: config,
+		DSN:                       config,
+		DefaultStringSize:         128,   // string 类型字段的默认长度
+		SkipInitializeWithVersion: false, // 根据版本自动配置
 	}), &gorm.Config{
-		NamingStrategy:         schema.NamingStrategy{SingularTable: true},
-		SkipDefaultTransaction: true,
+		NamingStrategy:                           schema.NamingStrategy{SingularTable: true},
+		SkipDefaultTransaction:                   true,
+		DisableForeignKeyConstraintWhenMigrating: true,
 		//Logger: logger.GetLogger(),
 	})
 	if err != nil {
@@ -49,18 +52,12 @@ func openDB(username, password, addr, name string) *gorm.DB {
 	}
 
 	// 设置字符集
-	db = db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8 auto_increment=1")
+	//db = db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8 auto_increment=1")
 	// set for db connection
-	setupDB(db)
-
-	return db
-}
-
-func setupDB(db *gorm.DB) {
+	//setupDB(db)
 	sqlDB, err := db.DB()
 	if err != nil {
-		logger.Error(err.Error())
-		return
+		panic(err.Error())
 	}
 	// 是否开启详细日志记录
 	//db.LogMode(viper.GetBool(`db.gorm.logMode`))
@@ -74,25 +71,15 @@ func setupDB(db *gorm.DB) {
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
 	sqlDB.SetConnMaxLifetime(time.Hour)
 
-	// 创建表的时候去掉复数
-	//db.SingularTable(viper.GetBool(`db.gorm.singularTable`))
-}
-
-func InitSelfDB() *gorm.DB {
-	//return openDB(viper.GetString("db.username"),
-	//	viper.GetString("db.password"),
-	//	viper.GetString("db.addr"),
-	//	viper.GetString("db.name"))
-
-	return openDB(config.DBConfig.UserName,
-		config.DBConfig.Password,
-		config.DBConfig.URL,
-		config.DBConfig.DBName)
+	return db
 }
 
 func (db *Database) Init() {
 	DB = &Database{
-		Self: InitSelfDB(),
+		Self: openDB(config.DBConfig.UserName,
+			config.DBConfig.Password,
+			config.DBConfig.URL,
+			config.DBConfig.DBName),
 	}
 }
 
