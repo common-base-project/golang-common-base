@@ -29,8 +29,8 @@ var (
 	UpdateHelpContentError = &Errno{Errno: 161002, Errmsg: "更新帮助文档失败"}
 
 	// namespace
-	CreateEmailError = &Errno{Errno: 160001, Errmsg: "创建Email失败"}
-	UpdateEmailError = &Errno{Errno: 160002, Errmsg: "更新Email失败"}
-	DeleteEmailError = &Errno{Errno: 160003, Errmsg: "删除Email失败"}
-	SelectEmailError = &Errno{Errno: 160005, Errmsg: "查询Email失败"}
+	CreateCommonError = &Errno{Errno: 160001, Errmsg: "创建失败"}
+	UpdateCommonError = &Errno{Errno: 160002, Errmsg: "更新失败"}
+	DeleteCommonError = &Errno{Errno: 160003, Errmsg: "删除失败"}
+	SelectCommonError = &Errno{Errno: 160005, Errmsg: "查询失败"}
 )

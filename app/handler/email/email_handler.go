@@ -43,7 +43,7 @@ func GetEmailListHandler(c *gin.Context) {
 
 	if err != nil {
 		logger.Error(err.Error())
-		Response(c, code.SelectEmailError, nil, err.Error())
+		Response(c, code.SelectCommonError, nil, err.Error())
 		return
 	}
 	Response(c, nil, result, "")
@@ -62,14 +62,14 @@ func AddEmailHandler(c *gin.Context) {
 	var text email.EmailTextContent
 	err := c.ShouldBind(&text)
 	if err != nil {
-		Response(c, code.CreateEmailError, nil, err.Error())
+		Response(c, code.CreateCommonError, nil, err.Error())
 		return
 	}
 	text.From = viper.GetString("email.support.sender")
 
 	err = connection.DB.Self.Create(&text).Error
 	if err != nil {
-		Response(c, code.CreateEmailError, nil, err.Error())
+		Response(c, code.CreateCommonError, nil, err.Error())
 		return
 	}
 
@@ -89,7 +89,7 @@ func UpdateEmailHandler(c *gin.Context) {
 	var textContent email.EmailTextContent
 	err := c.ShouldBind(&textContent)
 	if err != nil {
-		Response(c, code.UpdateEmailError, nil, err.Error())
+		Response(c, code.UpdateCommonError, nil, err.Error())
 		return
 	}
 	err = connection.DB.Self.Model(&email.EmailTextContent{}).
@@ -101,7 +101,7 @@ func UpdateEmailHandler(c *gin.Context) {
 			"content": textContent.Content,
 		}).Error
 	if err != nil {
-		Response(c, code.UpdateEmailError, nil, err.Error())
+		Response(c, code.UpdateCommonError, nil, err.Error())
 		return
 	}
 	Response(c, nil, nil, "")
@@ -119,7 +119,7 @@ func DeleteEmailHandler(c *gin.Context) {
 	contentId := c.Param("contentId")
 	err := connection.DB.Self.Where("id = ?", contentId).Delete(&email.EmailTextContent{}).Error
 	if err != nil {
-		Response(c, code.DeleteEmailError, nil, err.Error())
+		Response(c, code.DeleteCommonError, nil, err.Error())
 		return
 	}
 	Response(c, nil, nil, "")
@@ -138,7 +138,7 @@ func AddPushHandler(c *gin.Context) {
 	var text email.EmailTextContent
 	err := c.ShouldBind(&text)
 	if err != nil {
-		Response(c, code.CreateEmailError, nil, err.Error())
+		Response(c, code.CreateCommonError, nil, err.Error())
 		return
 	}
 	match, _ := regexp.MatchString(`(support|eim)@xxx\.com`, text.From)
@@ -148,7 +148,7 @@ func AddPushHandler(c *gin.Context) {
 
 	err = connection.DB.Self.Create(&text).Error
 	if err != nil {
-		Response(c, code.CreateEmailError, nil, err.Error())
+		Response(c, code.CreateCommonError, nil, err.Error())
 		return
 	}
 
