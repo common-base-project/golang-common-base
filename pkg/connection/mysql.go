@@ -3,7 +3,6 @@ package connection
 import (
 	"fmt"
 	"golang-common-base/pkg/config"
-	_ "golang-common-base/pkg/config"
 	"golang-common-base/pkg/logger"
 	"time"
 
@@ -27,7 +26,7 @@ func Initial() {
 }
 
 func openDB(username, password, addr, name string) *gorm.DB {
-	config := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=%t&loc=%s",
+	config := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=%t&loc=%s",
 		username,
 		password,
 		addr,
@@ -42,9 +41,10 @@ func openDB(username, password, addr, name string) *gorm.DB {
 		DefaultStringSize:         128,   // string 类型字段的默认长度
 		SkipInitializeWithVersion: false, // 根据版本自动配置
 	}), &gorm.Config{
-		NamingStrategy:                           schema.NamingStrategy{SingularTable: true},
-		SkipDefaultTransaction:                   true,
+		NamingStrategy:                           schema.NamingStrategy{SingularTable: false},
 		DisableForeignKeyConstraintWhenMigrating: true,
+		SkipDefaultTransaction:                   true,
+		//PrepareStmt: true,
 		//Logger: logger.GetLogger(),
 	})
 	if err != nil {
@@ -52,16 +52,10 @@ func openDB(username, password, addr, name string) *gorm.DB {
 	}
 
 	// 设置字符集
-	//db = db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8 auto_increment=1")
+	//db = db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8mb4")
 	// set for db connection
-	//setupDB(db)
-	sqlDB, err := db.DB()
-	if err != nil {
-		panic(err.Error())
-	}
-	// 是否开启详细日志记录
-	//db.LogMode(viper.GetBool(`db.gorm.logMode`))
 
+	sqlDB, _ := db.DB()
 	// 设置最大打开连接数
 	sqlDB.SetMaxOpenConns(viper.GetInt(`db.gorm.maxOpenConn`))
 

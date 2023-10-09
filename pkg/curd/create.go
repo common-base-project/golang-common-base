@@ -20,9 +20,9 @@ type Param struct {
 func whereDB(p *Param) (err error) {
 	db := connection.DB.Self
 
-	if p.WhereValue != "" {
-		db = db.Where("name = ?", p.WhereValue)
-	}
+	//if p.WhereValue != "" {
+	//	db = db.Where("name = ?", p.WhereValue)
+	//}
 
 	if p.WhereMap != nil {
 		for key, value := range p.WhereMap {
