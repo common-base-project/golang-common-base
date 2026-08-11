@@ -1,0 +1,32 @@
+//定义基础色
+
+//主色
+
+body {
+  --color-primary: #409eff;
+  --color-primary-light: rgb(64 158 255 / 8%);
+}
+
+@--color-primary:~ 'var(--color-primary)';
+@--color-primary-light:~ 'var(--color-primary-light)';
+
+@text: #595959;
+@text-2: #8c8c8c;
+
+//导航菜单
+@dark-text: rgb(255 255 255 / 66%);
+@dark-text-active: #eee;
+@dark-bg: #263238;
+@dark-bg-active: @--color-primary;
+
+@light-text: @text;
+@light-text-active: @--color-primary;
+@light-bg: #fff;
+@light-bg-active: @--color-primary-light;
+
+@primary-text: rgb(255 255 255 / 66%);
+@primary-text-2: rgb(255 255 255 / 65%);
+@primary-text-active: #fff;
+@primary-bg: @--color-primary;
+@primary-bg-light: @--color-primary-light;
+@primary-bg-active: @--color-primary-light;

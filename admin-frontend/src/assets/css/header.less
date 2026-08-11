@@ -1,0 +1,101 @@
+.rr-header-ctx {
+  [class^="el-icon"] {
+    font-size: 18px;
+    width: auto;
+    margin-right: 0;
+  }
+  .rr-header-right {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    overflow: hidden;
+    align-items: center;
+    > div {
+      height: 100%;
+    }
+    &-items {
+      display: flex;
+      padding: 0 8px 0 0;
+
+      > div {
+        padding: 0 12px;
+        height: 50px;
+        line-height: 56px;
+        cursor: pointer;
+      }
+      &-icon {
+        height: 50px;
+        line-height: 56px;
+        display: inline-block;
+      }
+      .el-badge {
+        line-height: normal;
+      }
+      .el-dropdown {
+        vertical-align: inherit;
+        .el-icon {
+          .icon {
+            vertical-align: bottom;
+          }
+        }
+      }
+    }
+    &-left {
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      flex: 1;
+      box-sizing: border-box;
+
+      &-br {
+        padding: 0 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex: 1;
+        .el-breadcrumb {
+          white-space: nowrap;
+        }
+        .el-breadcrumb__inner,
+        .el-breadcrumb__inner a,
+        .el-breadcrumb__item:last-child .el-breadcrumb__inner,
+        .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover,
+        .el-breadcrumb__item:last-child .el-breadcrumb__inner a,
+        .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover {
+          color: #8c8c8c;
+        }
+        .el-breadcrumb__item {
+          float: none !important;
+          display: inline-block;
+        }
+        .el-breadcrumb__inner.is-link {
+          color: #595959;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .el-space__item {
+      &:last-child {
+        flex-shrink: 0;
+      }
+    }
+
+    .rr-sidebar-menu.el-menu--horizontal {
+      display: flex;
+      span {
+        width: inherit;
+      }
+      .el-sub-menu {
+        .el-sub-menu__icon-arrow {
+          margin-left: 3px;
+          margin-top: 0;
+        }
+        .el-sub-menu__title {
+          padding: 0 10px 0 12px;
+          height: 50px;
+          line-height: 50px;
+        }
+      }
+    }
+  }
+}

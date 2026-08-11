@@ -1,0 +1,97 @@
+@import "./base.less";
+
+@media only screen and (max-width: 768px) {
+  .rr-header-action {
+    display: flex !important;
+  }
+  .show-xs-only {
+    display: block !important;
+  }
+}
+@media only screen and (min-width: 768px) {
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+}
+@media only screen and (max-width: 992px) {
+}
+@media only screen and (min-width: 992px) {
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (min-width: 1200px) {
+}
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+}
+@media only screen and (max-width: 1920px) {
+}
+@media only screen and (min-width: 1920px) {
+}
+
+//
+.ui-mobile {
+  .rr-view-tab-wrap {
+    left: 0 !important;
+    transition: left 0s !important;
+  }
+  .rr-header-ctx-logo-img-wrap {
+    display: none !important;
+  }
+}
+
+.rr-sidebar-mobile {
+  z-index: 9999 !important;
+  &-inner {
+    margin: 0;
+    padding: 0;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+.ui-sidebar-light .rr-sidebar-mobile {
+  .el-drawer__body,
+  .rr-header-ctx-logo-mobile {
+    background: @light-bg !important;
+  }
+  .rr-header-ctx-logo-mobile {
+    color: @light-text !important;
+  }
+}
+.ui-sidebar-dark .rr-sidebar-mobile {
+  .el-drawer__body,
+  .rr-header-ctx-logo-mobile {
+    background: @dark-bg !important;
+  }
+  .rr-header-ctx-logo-mobile {
+    color: @dark-text !important;
+  }
+}
+.ui-sidebarCollapse-true,
+.ui-sidebarCollapse-false {
+  .rr-sidebar-mobile {
+    width: initial !important;
+    .el-menu.rr-sidebar-menu {
+      width: 230px !important;
+      .el-menu-item,
+      .el-sub-menu__title {
+        a {
+          display: inline-block !important;
+        }
+      }
+    }
+    .rr-header-ctx-logo.rr-header-ctx-logo-mobile {
+      width: auto !important;
+      .rr-header-ctx-logo-text {
+        display: inline-block !important;
+      }
+    }
+
+    .el-drawer,
+    .el-drawer__body {
+      box-shadow: none !important;
+    }
+  }
+}

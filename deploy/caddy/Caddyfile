@@ -1,0 +1,9 @@
+{
+  email {$CADDY_ACME_EMAIL}
+}
+
+{$CASDOOR_DOMAIN} {
+  encode gzip
+
+  reverse_proxy casdoor:8000
+}

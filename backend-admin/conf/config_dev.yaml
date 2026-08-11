@@ -1,0 +1,69 @@
+server:
+  host: 0.0.0.0
+  port: :9001
+db:
+  driver: mysql
+  name: db_common_base
+  addr: 183.69.165.67:13306
+  username: root
+  password: aicorn123456
+  dsn: "root:aicorn123456@tcp(183.69.165.67:13306)/db_common_base?charset=utf8mb4&parseTime=True&loc=Local"
+  sqlite:
+    path: ./data/backend-admin-dev.db
+  gorm:
+    logMode: 0
+    maxOpenConn: 100
+    maxIdleConn: 10
+    singularTable: 1
+redis:
+  addr: 183.69.165.67:16379
+  password: "aicorn123456"
+  db: 6
+minio:
+  endpoint: http://183.69.165.67:9000
+  access_key: MaWriJRncV5fiagkKdfq
+  secret_key: xvN2cfvPrj6TsEyuxVXvksDQV4uTQP35VJfcmuvx
+  use_ssl: false
+  bucket: test  #backend-admin
+auth:
+  casdoor:
+    enabled: false
+    issuer: http://127.0.0.1:8000
+    client_id: backend-admin
+authz:
+  casbin:
+    enabled: true
+    model_path: ./conf/casbin_model.conf
+    bootstrap:
+      enabled: true
+      subject: admin
+mq:
+  mq_addr: "amqp://guest:guest@localhost:5672/"
+  queue_name: "msgQueueWithPersist"
+  producernt: 5
+  consumercnt: 20
+log:
+  level: debug
+  maxsize: 1
+  maxage: 30
+  maxbackups: 10
+  localtime: 1
+  compress: 1
+  fileName: golang-common-base.log
+api:
+  version: /api/v1
+jwt:
+  secret: vz5(#pfnf+#p5ok&d2yrqd#)k0jz!#tb*$=^c5nl0(z+0=p5!9
+email:
+  eim:
+    server: partner.outlook.cn
+    sender: eim@xxx.com
+    password: 123456
+    port: 587
+    security: true
+  support:
+    server: partner.outlook.cn
+    sender: support@xxx.com
+    password: 123456
+    port: 587
+    security: true

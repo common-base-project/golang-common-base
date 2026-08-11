@@ -1,0 +1,44 @@
+services:
+  casdoor:
+    image: casbin/casdoor:latest
+    container_name: casdoor
+    restart: unless-stopped
+    env_file:
+      - .env.casdoor
+    environment:
+      GIN_MODE: release
+      driverName: mysql
+      dataSourceName: "${CASDOOR_DB_USER}:${CASDOOR_DB_PASSWORD}@tcp(${CASDOOR_DB_HOST}:${CASDOOR_DB_PORT})/${CASDOOR_DB_NAME}?charset=utf8mb4&parseTime=True&loc=Local"
+    expose:
+      - "8000"
+    volumes:
+      - ./casdoor/conf:/conf
+      - ./casdoor/logs:/logs
+    networks:
+      - casdoor-network
+
+  caddy:
+    image: caddy:latest
+    container_name: casdoor-caddy
+    restart: unless-stopped
+    env_file:
+      - .env.casdoor
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - casdoor
+    networks:
+      - casdoor-network
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  casdoor-network:
+    driver: bridge
